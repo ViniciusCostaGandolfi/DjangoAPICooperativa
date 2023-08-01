@@ -1,0 +1,49 @@
+
+# Arquivos e diretórios específicos
+db.sqlite3
+*.pyc
+*.log
+*.pot
+__pycache__/
+media/
+
+# Diretório de ambiente virtual
+venv/
+.env
+
+env.json
+
+# Arquivos gerados durante o desenvolvimento
+staticfiles/
+instance/
+.webassets-cache
+.scrapy
+
+# Arquivos e diretórios de dependências e construção
+build/
+dist/
+downloads/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Arquivos de configuração e segredos
+local_settings.py
+settings_local.py
+secrets.json
+
+# Arquivos temporários ou gerados automaticamente
+*.bak
+*.swp
+*.tmp
+*.pyc
+.DS_Store
+Thumbs.db

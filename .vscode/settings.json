@@ -1,0 +1,20 @@
+{
+    "python.analysis.typeCheckingMode": "basic",
+    "python.linting.pylintArgs": ["--load-plugins"], // Caso você esteja usando o Django (opcional)
+    "python.linting.pylintPath": "${workspaceFolder}/venv/bin/pylint", // Caminho para o PyLint dentro da venv        "pylint.args": ["--rcfile=<caminho/para/o/seu/arquivo_rc>"],
+        "pylint.severity": {
+            "convention": "Information",
+            "error": "Error",
+            "fatal": "Error",
+            "refactor": "Hint",
+            "warning": "Warning",
+            "info": "Information",
+            "W0611": "Error",
+            "undefined-variable": "Warning"
+        },
+        "pylint.interpreter": ["${workspaceFolder}/venv/bin/python"],
+        "pylint.importStrategy": "useBundled",
+    
+    
+    
+}
