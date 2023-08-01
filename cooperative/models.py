@@ -1,15 +1,9 @@
 from django.db import models
 
 
-# class Product(models.Model):
-#     name = models.CharField(max_length=2048)
-#     volume = models.FloatField()
-    
-
 class Route(models.Model):
     text_route = models.CharField(max_length=2048)
     google_maps_link = models.CharField(max_length=2048)
-    # text_orders = models.CharField(max_length=2048)
     sorted_route_indexes = models.JSONField()
     use_longest_point = models.BooleanField(default=None, null=True)
     
@@ -23,7 +17,6 @@ class Base(models.Model):
 
 class Order(models.Model):
     name = models.CharField(max_length=128)
-    # volume = models.FloatField()
     itens = models.CharField(max_length=2048)
     adress = models.CharField(max_length=1024)
     phone = models.CharField(max_length=20)
