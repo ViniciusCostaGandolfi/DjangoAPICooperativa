@@ -41,31 +41,28 @@ class CooperativeTravelSalesman:
     def resolve(self):
         self.maximo_points_validos()
         tempo = time.time()
-        x = {} # Definindo x como um dicionário
+        x = {}
         for i in self.rangeI:
             for j in self.rangeJ:
                 x[i, j] = self.solver.IntVar(0, 1, f"x[{i, j}]")
 
-        y = {} # Definindo y como um dicionário
+        y = {}
         for i in self.rangeI:
             for j in self.rangeJ:
                 y[i, j] = self.solver.NumVar(0, self.solver.Infinity(), f"y[{i, j}]")
 
 
-        # Rest1
         for i in self.rangeI:
             self.solver.Add(self.solver.Sum([x[i, j] for j in self.rangeJ if i != j]) == 1, name='rest1_')
-        # Rest2
+            
         for j in self.rangeJ:
             self.solver.Add(self.solver.Sum([x[i, j] for i in self.rangeI if i != j]) == 1, name='rest2_')
-
-        # Rest3
+            
         for i in self.rangeI:
             for j in self.rangeJ:
                 if i != j:
                     self.solver.Add(y[i, j] <= (self.numeroDepoints - 1) * x[i, j], name='rest3_')
 
-        # Rest4
         for j in self.rangeJLess:
             self.solver.Add(self.solver.Sum([y[i, j] for i in self.rangeI if i != j]) == 1 + self.solver.Sum([y[j, i] for i in self.rangeI if i != j]), name='rest4_')
             
@@ -79,19 +76,17 @@ class CooperativeTravelSalesman:
             print(self.use_longest_point)
             self.solver.Add(x[longest_point, 0] == 1)
 
-        # Função Objetivo
         funcaoObjetivo = []
         for i in self.rangeI:
             for j in self.rangeJ:
                 if i != j:
                     funcaoObjetivo.append(x[i, j] * self.matriz[i, j])
-        # Resolvendo o Problema
+
         self.solver.Minimize(self.solver.Sum(funcaoObjetivo))
         status = self.solver.Solve()
 
         if status == pywraplp.Solver.OPTIMAL or status == pywraplp.Solver.FEASIBLE:
             self.resposta["distancia"] =  float(self.solver.Objective().Value())
-            #self.resposta["tempo"] = time.time() - tempo
 
             for i in self.rangeI:
                 for j in self.rangeJ:
